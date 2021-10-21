@@ -13,19 +13,23 @@ route.post("/", (req, res) => {
     const {email, nome, telefone} = req.body;
 
     async function main(){
-        await prisma.candidato.create({
-            data:{
-                id: "127614576152ewe",
-                email,
-                nome,
-                telefone
-            }
-        })
+        try{
+            await prisma.candidato.create({
+                data:{
+                    id: "127614576152eewe",
+                    email,
+                    nome,
+                    telefone
+                }
+            })
+            return res.json({ok: "Candidato was created"});
+        }catch (e) {
+            console.error(e);
+            return res.json({err: e});
+        } 
     }
-
     main();
 
-    return res.json({ok: "Candidato was created"})
 })
 
 module.exports = route
